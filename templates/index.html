@@ -5,27 +5,8 @@
 {% block content %}
 <div class="card">
     <h2>Bienvenue sur P345THEORIES</h2>
-    <p>Découvrez les théories, partagez vos idées et discutez avec la communauté passionnée de Persona 3, 4 et 5.</p>
-    <p>Connectez-vous ou inscrivez-vous pour participer aux discussions et partager vos propres théories !</p>
+    
+    <p>Découvrez les théories, partagez vos idées et discutez avec LA commu la PLUS passionnée de Persona 3, 4 et 5.</p>
+    
 </div>
-
-<div class="card">
-    <h2>Qu'est-ce que P345THEORIES ?</h2>
-    <p>
-        P345THEORIES est une plateforme communautaire dédiée aux fans de la série Persona. 
-        Ici, vous pouvez échanger vos théories sur l'univers, les personnages, les intrigues 
-        et tous les mystères qui entourent Persona 3, 4 et 5.
-    </p>
-</div>
-
-{% if not session.get("user") %}
-<div class="card" style="text-align: center;">
-    <h2>Rejoignez la communauté !</h2>
-    <p>Créez un compte pour commencer à partager vos théories</p>
-    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
-        <a href="/signup" class="btn btn-signup">S'inscrire</a>
-        <a href="/login" class="btn btn-login">Se connecter</a>
-    </div>
-</div>
-{% endif %}
 {% endblock %}
