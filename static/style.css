@@ -1,131 +1,144 @@
-/* ---- RESET ---- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ========= GLOBAL ========= */
 
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #e9f7f7;
-    color: #333;
+    background: #e3f2f2;
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
 }
 
-/* ---- NAVBAR ---- */
+/* ========= TOP BAR ========= */
 
-.navbar {
-    background: #b5e4df;
-    padding: 15px 30px;
+.topbar {
+    background: #c7e8e8;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 3px solid #9cd4ce;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    padding: 18px 35px;
+    border-bottom: 3px solid #b6dcdc;
 }
 
 .logo {
+    font-size: 28px;
     font-weight: 700;
-    font-size: 22px;
-    color: #145c63;
+    color: #2a6f75;
     text-decoration: none;
 }
 
-.nav-right a {
+.top-right a {
     margin-left: 20px;
+    color: #2a6f75;
     text-decoration: none;
-    color: #145c63;
+    font-size: 17px;
     font-weight: 500;
 }
 
-.nav-right .user {
+.user-tag {
     margin-left: 20px;
-    font-weight: bold;
-    color: #2a6f75;
+    background: white;
+    padding: 4px 10px;
+    border-radius: 7px;
 }
 
-/* Buttons */
-.btn-login {
-    background: #86d1cc;
-    padding: 6px 12px;
-    border-radius: 8px;
-    color: #0e4d52;
+/* ========= BUTTONS ========= */
+
+.btn {
+    padding: 6px 14px;
+    border-radius: 10px;
+    color: white !important;
 }
 
-.btn-signup {
-    background: #7ba7eb;
-    padding: 6px 12px;
-    border-radius: 8px;
-    color: white;
+.btn.green { background: #99e6b3; }
+.btn.blue { background: #8aa4ff; }
+.btn.red { background: #ff7373; }
+
+/* ========= CONTENT ========= */
+
+.content {
+    padding: 40px 60px;
 }
 
-.btn-logout {
-    background: #ff7a7a;
-    padding: 6px 12px;
-    border-radius: 8px;
-    color: white;
-}
-
-/* ---- PAGE CONTAINER ---- */
-
-.container {
-    margin: 40px auto;
-    max-width: 900px;
-    padding: 20px;
-}
-
-/* ---- CARDS ---- */
+/* ========= CARD STYLES (pour index & commentaires) ========= */
 
 .card {
     background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    margin-bottom: 25px;
-}
-
-/* ---- COMMENTAIRES ---- */
-
-.comment {
-    background: #ffd5d5;
-    border-left: 6px solid #ff8c8c;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-}
-
-.comment strong {
-    color: #b40000;
-}
-
-/* ---- FORM ---- */
-
-form {
-    background: #ffffff;
     padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    margin-bottom: 30px;
+}
+
+/* Annonce rose (index) */
+.announcement {
+    background: #ffb8b8;
+    padding: 18px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+/* Commentaires style Whimsical */
+.comment-box {
+    background: #ff7373;
+    color: white;
+    padding: 18px;
+    margin-top: 20px;
     border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    font-size: 17px;
+}
+
+/* ========= FORM (login/signup) ========= */
+
+.form-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 22px;
+    width: 430px;
+    margin: 40px auto;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.form-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #396b82;
 }
 
 input {
     width: 100%;
-    padding: 10px;
-    margin-top: 8px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    padding: 12px;
+    margin-top: 12px;
+    border: 2px solid #b7d3d3;
+    border-radius: 10px;
 }
 
 button {
-    padding: 10px 16px;
-    border-radius: 8px;
+    width: 100%;
+    margin-top: 20px;
+    background: #8aa4ff;
+    padding: 12px;
     border: none;
-    background: #7ba7eb;
     color: white;
-    cursor: pointer;
+    border-radius: 10px;
+    font-size: 18px;
 }
 
 button:hover {
-    background: #6893d8;
+    opacity: 0.9;
+}
+
+/* ========= CONTACT ========= */
+
+.contact-box {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contact-image {
+    width: 180px;
+    height: 140px;
+    background: #d9e3ea;
+    border-radius: 12px;
+    margin: auto;
 }

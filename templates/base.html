@@ -3,33 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>P345THEORIES</title>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
-<header class="navbar">
-    <div class="nav-left">
+<header class="topbar">
+    <div class="top-left">
         <a class="logo" href="/">P345THEORIES</a>
     </div>
 
-    <div class="nav-right">
+    <div class="top-right">
         <a href="/">Accueil</a>
         <a href="/comments">Commentaires</a>
         <a href="/contact">Contact</a>
 
         {% if session.get("user") %}
-            <span class="user">👤 {{ session.get('user') }}</span>
-            <a class="btn-logout" href="/logout">Déconnexion</a>
+            <span class="user-tag">Connecté : {{ session["user"] }}</span>
+            <a class="btn red" href="/logout">Log Out</a>
         {% else %}
-            <a class="btn-login" href="/login">Connexion</a>
-            <a class="btn-signup" href="/signup">Inscription</a>
+            <a class="btn green" href="/login">Log In</a>
+            <a class="btn blue" href="/signup">Sign Up</a>
         {% endif %}
     </div>
 </header>
 
-<main class="container">
+<main class="content">
     {% block content %}{% endblock %}
 </main>
 
