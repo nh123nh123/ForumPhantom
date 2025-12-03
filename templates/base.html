@@ -2,34 +2,43 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>P345THEORIES</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}P345THEORIES{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<header class="topbar">
-    <div class="top-left">
-        <a class="logo" href="/">P345THEORIES</a>
-    </div>
+<header class="navbar">
+    <div class="nav-container">
+        <div class="nav-left">
+            <a class="logo" href="/">P345THEORIES</a>
+        </div>
 
-    <div class="top-right">
-        <a href="/">Accueil</a>
-        <a href="/comments">Commentaires</a>
-        <a href="/contact">Contact</a>
+        <nav class="nav-center">
+            <a href="/" class="nav-link">Accueil</a>
+            <a href="/comments" class="nav-link">Commentaires</a>
+            <a href="/contact" class="nav-link">Contact</a>
+        </nav>
 
-        {% if session.get("user") %}
-            <span class="user-tag">Connecté : {{ session["user"] }}</span>
-            <a class="btn red" href="/logout">Log Out</a>
-        {% else %}
-            <a class="btn green" href="/login">Log In</a>
-            <a class="btn blue" href="/signup">Sign Up</a>
-        {% endif %}
+        <div class="nav-right">
+            {% if session.get("user") %}
+                <span class="user-badge">{{ session["user"] }}</span>
+                <a class="btn btn-logout" href="/logout">Log Out</a>
+            {% else %}
+                <a class="btn btn-login" href="/login">Log In</a>
+                <a class="btn btn-signup" href="/signup">Sign Up</a>
+            {% endif %}
+        </div>
     </div>
 </header>
 
-<main class="content">
+<main class="main-content">
     {% block content %}{% endblock %}
 </main>
+
+<footer class="footer">
+    <p>&copy; 2024 P345THEORIES - Communauté de théories sur Persona 3/4/5</p>
+</footer>
 
 </body>
 </html>
