@@ -1,0 +1,131 @@
+/* ---- RESET ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #e9f7f7;
+    color: #333;
+}
+
+/* ---- NAVBAR ---- */
+
+.navbar {
+    background: #b5e4df;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #9cd4ce;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 22px;
+    color: #145c63;
+    text-decoration: none;
+}
+
+.nav-right a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #145c63;
+    font-weight: 500;
+}
+
+.nav-right .user {
+    margin-left: 20px;
+    font-weight: bold;
+    color: #2a6f75;
+}
+
+/* Buttons */
+.btn-login {
+    background: #86d1cc;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #0e4d52;
+}
+
+.btn-signup {
+    background: #7ba7eb;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: white;
+}
+
+.btn-logout {
+    background: #ff7a7a;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: white;
+}
+
+/* ---- PAGE CONTAINER ---- */
+
+.container {
+    margin: 40px auto;
+    max-width: 900px;
+    padding: 20px;
+}
+
+/* ---- CARDS ---- */
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+/* ---- COMMENTAIRES ---- */
+
+.comment {
+    background: #ffd5d5;
+    border-left: 6px solid #ff8c8c;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.comment strong {
+    color: #b40000;
+}
+
+/* ---- FORM ---- */
+
+form {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #7ba7eb;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #6893d8;
+}

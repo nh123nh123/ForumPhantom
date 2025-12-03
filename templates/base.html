@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>P345THEORIES</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    
+
+<header class="navbar">
+    <div class="nav-left">
+        <a class="logo" href="/">P345THEORIES</a>
+    </div>
+
+    <div class="nav-right">
+        <a href="/">Accueil</a>
+        <a href="/comments">Commentaires</a>
+        <a href="/contact">Contact</a>
+
+        {% if session.get("user") %}
+            <span class="user">👤 {{ session.get('user') }}</span>
+            <a class="btn-logout" href="/logout">Déconnexion</a>
+        {% else %}
+            <a class="btn-login" href="/login">Connexion</a>
+            <a class="btn-signup" href="/signup">Inscription</a>
+        {% endif %}
+    </div>
+</header>
+
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+
 </body>
 </html>
