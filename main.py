@@ -2,21 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import os
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY", "super_secret_change_me_in_production")
+app.secret_key = os.environ.get("SECRET_KEY", "mongo_KEY")
 
-###############################################
-# CONFIGURATION - Zone pour MongoDB plus tard #
-###############################################
-# from pymongo import MongoClient
-# MONGO_URI = os.environ.get("MONGO_URI", "mongodb://localhost:27017/")
-# client = MongoClient(MONGO_URI)
+from pymongo import MongoClient
+client = pymongo.MongoClient("")
 # db = client["p345theories"]
 # users_collection = db["users"]
 # comments_collection = db["comments"]
 
-###################################
-# HELPERS - Fonctions utilitaires #
-###################################
 def get_user_by_username(username):
     """
     À remplacer par une requête MongoDB
@@ -69,7 +62,6 @@ def login():
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
 
-        # Validation basique
         if not username or not password:
             flash("Veuillez remplir tous les champs", "error")
             return render_template("login.html")
@@ -94,7 +86,6 @@ def signup():
         password = request.form.get("password", "")
         confirm_password = request.form.get("confirm_password", "")
 
-        # Validation
         if not username or not password:
             flash("Veuillez remplir tous les champs", "error")
             return render_template("signup.html")
@@ -161,4 +152,4 @@ def contact():
 ############################
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=8888)
