@@ -34,16 +34,13 @@ def get_all_comments():
     Exemple futur: return list(comments_collection.find().sort("created_at", -1))
     """
     return [
-        {"author": "Alpha", "text": "Théorie intéressante sur Persona 3/4/5 !"},
-        {"author": "Beta", "text": "J'ai une nouvelle théorie à partager..."},
-        {"author": "Gamma", "text": "Discussion sur les social links"}
+        {"": "", "text": ""},
+        {"": "", "text": ""},
+        {"": "", "text": ""}
     ]
 
 def add_comment(author, text):
-    """
-    À remplacer par une insertion MongoDB
-    Exemple futur: comments_collection.insert_one({"author": author, "text": text, "created_at": datetime.now()})
-    """
+    ""
     pass
 
 ##########
