@@ -1,12 +1,9 @@
-{% extends "base.html" %}
-
-{% block title %}Accueil - P345THEORIES{% endblock %}
-
-{% block content %}
-<div class="card">
-    <h2>Bienvenue sur P345THEORIES</h2>
-    
-    <p>Découvrez les théories, partagez vos idées et discutez avec LA commu la PLUS passionnée de Persona 3, 4 et 5.</p>
-    
-</div>
-{% endblock %}
+{% if recent_comments %}
+<h2>Derniers commentaires</h2>
+{% for comment in recent_comments %}
+    <div class="comment">
+        <strong>{{ comment.author }}</strong> : {{ comment.text }}
+        <small>{{ comment.created_at.strftime('%d/%m/%Y %H:%M') }}</small>
+    </div>
+{% endfor %}
+{% endif %}

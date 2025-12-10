@@ -2,49 +2,31 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import os
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "mongo_KEY")
 
 from pymongo import MongoClient
 
-# CONFIGURATION MONGODB
-# Nom du projet : P345THEORIES
-# Nom du cluster : p345user
-# Username : noahhuai333333_db_user
-# Password : mgh9In1rcNZnT43E
-
-# ✅ Chaîne de connexion MongoDB Atlas
 MONGO_URI = "mongodb+srv://noahhuai333333_db_user:mgh9In1rcNZnT43E@p345user.mulf4h8.mongodb.net/?retryWrites=true&w=majority&appName=p345user"
 
-# CONNEXION À MONGODB
 try:
     client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-    # Test immédiat de la connexion
     client.server_info()
-    print("✅ Connexion à MongoDB réussie !")
+    print(" Connexion à MongoDB réussie !")
 except Exception as e:
-    print(f"❌ Erreur de connexion MongoDB : {e}")
-    print("🔍 Vérifiez :")
-    print("   1) Vous avez copié la VRAIE chaîne depuis MongoDB Atlas")
-    print("   2) Votre IP est autorisée dans Network Access")
-    print("   3) Le mot de passe est correct : mgh9In1rcNZnT43E")
-    # On crée quand même un client pour éviter les erreurs, mais il ne fonctionnera pas
+    print(f" Erreur : {e}")
     client = MongoClient()
 
-# COLLECTIONS
 db = client["p345theories"]
 users_collection = db["users"]
 comments_collection = db["comments"]
 
-# FONCTIONS BASE DE DONNÉES
-
 def get_user_by_username(username):
-    """Récupère un utilisateur par son nom d'utilisateur"""
     return users_collection.find_one({"username": username})
 
 def create_user(username, password):
-    """Crée un nouvel utilisateur avec mot de passe hashé"""
     hashed_password = generate_password_hash(password)
     user_data = {
         "username": username,
@@ -55,11 +37,9 @@ def create_user(username, password):
     return user_data
 
 def get_all_comments():
-    """Récupère tous les commentaires triés par date décroissante"""
     return list(comments_collection.find().sort("created_at", -1))
 
 def add_comment(author, text):
-    """Ajoute un nouveau commentaire"""
     comment_data = {
         "author": author,
         "text": text,
@@ -67,18 +47,16 @@ def add_comment(author, text):
     }
     comments_collection.insert_one(comment_data)
 
-##########
-# ROUTES #
-##########
+def delete_comment(comment_id):
+    comments_collection.delete_one({"_id": ObjectId(comment_id)})
 
 @app.route("/")
 def index():
-    """Page d'accueil"""
-    return render_template("index.html")
+    recent_comments = list(comments_collection.find().sort("created_at", -1).limit(5))
+    return render_template("index.html", recent_comments=recent_comments)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """Page de connexion"""
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
@@ -87,7 +65,6 @@ def login():
             flash("Veuillez remplir tous les champs", "error")
             return render_template("login.html")
 
-        # Vérification utilisateur avec MongoDB
         user = get_user_by_username(username)
         if user and check_password_hash(user["password"], password):
             session["user"] = username
@@ -101,7 +78,6 @@ def login():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    """Page d'inscription"""
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
@@ -119,12 +95,10 @@ def signup():
             flash("Le mot de passe doit contenir au moins 4 caractères", "error")
             return render_template("signup.html")
 
-        # Vérifier si l'utilisateur existe déjà
         if get_user_by_username(username):
             flash("Ce nom d'utilisateur existe déjà", "error")
             return render_template("signup.html")
 
-        # Créer l'utilisateur dans MongoDB
         create_user(username, password)
         flash("Compte créé avec succès ! Connectez-vous maintenant.", "success")
         return redirect(url_for("login"))
@@ -133,7 +107,6 @@ def signup():
 
 @app.route("/comments")
 def comments():
-    """Page des commentaires - nécessite d'être connecté"""
     if "user" not in session:
         flash("Vous devez être connecté pour accéder aux commentaires", "warning")
         return redirect(url_for("login"))
@@ -143,7 +116,6 @@ def comments():
 
 @app.route("/add_comment", methods=["POST"])
 def add_comment_route():
-    """Route pour ajouter un commentaire"""
     if "user" not in session:
         return redirect(url_for("login"))
     
@@ -154,9 +126,17 @@ def add_comment_route():
     
     return redirect(url_for("comments"))
 
+@app.route("/delete_comment/<comment_id>", methods=["POST"])
+def delete_comment_route(comment_id):
+    if "user" not in session:
+        return redirect(url_for("login"))
+    
+    delete_comment(comment_id)
+    flash("Commentaire supprimé !", "success")
+    return redirect(url_for("comments"))
+
 @app.route("/logout")
 def logout():
-    """Déconnexion"""
     username = session.get("user")
     session.clear()
     flash(f"À bientôt {username} !", "info")
@@ -164,13 +144,7 @@ def logout():
 
 @app.route("/contact")
 def contact():
-    """Page de contact"""
     return render_template("contact.html")
-
-
-############################
-# LANCEMENT DE L'APPLICATION
-############################
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8888)
