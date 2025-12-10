@@ -1,9 +1,44 @@
-{% if recent_comments %}
-<h2>Derniers commentaires</h2>
-{% for comment in recent_comments %}
-    <div class="comment">
-        <strong>{{ comment.author }}</strong> : {{ comment.text }}
-        <small>{{ comment.created_at.strftime('%d/%m/%Y %H:%M') }}</small>
+{% extends "base.html" %}
+
+{% block title %}Accueil - P345THEORIES{% endblock %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 0 auto; padding: 40px 20px;">
+    
+    <div style="text-align: center; margin-bottom: 50px;">
+        <h1 style="font-size: 2.5em; margin-bottom: 15px;">Bienvenue sur P345THEORIES</h1>
+        <p style="font-size: 1.2em; color: #555;">Le forum de discussion sur les théories de Persona 3, 4 et 5</p>
+        <p>Rejoignez notre communauté pour partager vos théories et découvrir celles des autres !</p>
     </div>
-{% endfor %}
-{% endif %}
+
+    <div style="background: #f5f5f5; padding: 30px; border-radius: 10px; margin-bottom: 40px;">
+        <h2 style="margin-bottom: 20px;">Derniers commentaires</h2>
+        
+        {% if recent_comments %}
+            {% for comment in recent_comments %}
+            <div style="background: white; padding: 20px; margin-bottom: 15px; border-radius: 8px; border-left: 4px solid #4CAF50;">
+                <div style="margin-bottom: 10px;">
+                    <strong style="color: #2c3e50; font-size: 1.1em;">{{ comment.author }}</strong>
+                    <span style="color: #999; font-size: 0.9em; margin-left: 10px;">{{ comment.created_at.strftime('%d/%m/%Y à %H:%M') }}</span>
+                </div>
+                <div style="color: #333; line-height: 1.6;">
+                    {{ comment.text }}
+                </div>
+            </div>
+            {% endfor %}
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="{{ url_for('comments') }}" style="display: inline-block; background: #4CAF50; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold;">Voir tous les commentaires →</a>
+            </div>
+        {% else %}
+            <p style="text-align: center; color: #666; padding: 40px;">Aucun commentaire pour le moment. Soyez le premier à en poster un !</p>
+            {% if not session.get("user") %}
+            <p style="text-align: center;">
+                <a href="{{ url_for('signup') }}" style="color: #4CAF50; font-weight: bold;">Créez un compte</a> pour commencer à discuter.
+            </p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
