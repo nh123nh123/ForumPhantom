@@ -5,15 +5,15 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "mongo_KEY")
 
 from pymongo import MongoClient
-client = pymongo.MongoClient("")
+# client = MongoClient("")
 # db = client["p345theories"]
 # users_collection = db["users"]
 # comments_collection = db["comments"]
 
 def get_user_by_username(username):
     """
-    À remplacer par une requête MongoDB
-    Exemple futur: return users_collection.find_one({"username": username})
+    
+    return users_collection.find_one({"username": username})
     """
     # Base de données temporaire en mémoire
     fake_users = {
